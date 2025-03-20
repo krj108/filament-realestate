@@ -18,13 +18,14 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->text('content');
             $table->string('featured_image')->nullable();
-            $table->json('image_gallery')->nullable();
+            $table->text('image_gallery')->nullable();
             $table->string('location');
             $table->enum('type', ['villa', 'house', 'office']);
             $table->integer('bedrooms');
             $table->integer('bathrooms');
             $table->integer('area');
-            $table->enum('status', ['draft', 'published'])->default('draft'); // ✅ إضافة الحالة
+            $table->enum('status', ['draft', 'published'])->default('draft');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // احذف after('status')
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();
