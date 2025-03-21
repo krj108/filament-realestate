@@ -1,9 +1,11 @@
 <?php
 
 namespace Database\Seeders;
+use Filament\Commands\MakeUserCommand as FilamentMakeUserCommand;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,12 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $filamentMakeUserCommand = new FilamentMakeUserCommand();
+        $reflector = new \ReflectionObject($filamentMakeUserCommand);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $getUserModel = $reflector->getMethod('getUserModel');
+        $getUserModel->setAccessible(true);
+        $getUserModel->invoke($filamentMakeUserCommand)::create([
+            'name' => 'admin123',
+            'email' => 'admin123@gmail.com',
+            'password' => Hash::make('admin123'),
+        ]);
 
         $this->call([
             UserSeeder::class, 
