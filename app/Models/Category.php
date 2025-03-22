@@ -22,4 +22,10 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
+
+    public function articles()
+{
+    return $this->hasMany(Article::class, 'category_id');
+}
+
 }
