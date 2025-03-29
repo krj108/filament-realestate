@@ -121,8 +121,8 @@ class PageResource extends Resource
                     ->label('Status')
                     ->formatStateUsing(fn ($state) => $state ? 'Published' : 'Draft') // ✅ استبدال enum()
                     ->colors([
-                        'danger' => fn ($state) => !$state, // ❌ أحمر إذا كانت مسودة
-                        'success' => fn ($state) => $state, // ✅ أخضر إذا كانت منشورة
+                        'danger' => fn ($state) => !$state, 
+                        'success' => fn ($state) => $state, 
                     ])
                     ->sortable(),
                     Tables\Columns\TextColumn::make('slug')->

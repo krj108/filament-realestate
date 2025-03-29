@@ -2,8 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\FAQController;
+use App\Http\Controllers\API\TagController;
+use App\Http\Controllers\API\PageController;
 use App\Http\Controllers\API\ArticleController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\PropertyController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,3 +30,15 @@ Route::get('/articles/{slug}', [ArticleController::class, 'show']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{id}/articles', [CategoryController::class, 'articles']);
+
+Route::get('/faqs', [FAQController::class, 'index']);
+Route::get('/faqs/{id}', [FAQController::class, 'show']);
+
+Route::get('/properties', [PropertyController::class, 'index']);
+Route::get('/properties/{slug}', [PropertyController::class, 'show']);
+
+Route::get('/pages', [PageController::class, 'index']);
+Route::get('/pages/{slug}', [PageController::class, 'show']);
+
+Route::get('/tags', [TagController::class, 'index']);
+Route::get('/tags/{id}', [TagController::class, 'show']);
