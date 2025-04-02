@@ -44,6 +44,7 @@ class User extends Authenticatable implements HasAvatar
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'custom_fields' => 'array',
     ];
 
     public function getFilamentAvatarUrl(): ?string
