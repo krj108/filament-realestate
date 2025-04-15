@@ -17,7 +17,6 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -58,14 +57,11 @@ class AdminPanelProvider extends PanelProvider
       
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                FilamentEditProfilePlugin::make()
-                ->setIcon('heroicon-o-user')
-                ->shouldShowAvatarForm(
-                    value: true,
-                    directory: 'avatars', // image will be stored in 'storage/app/public/avatars
-                    rules: 'mimes:jpeg,png|max:1024' //only accept jpeg and png files with a maximum size of 1MB
-                )
          
-          ]);
+          ])
+          
+        //   ->topNavigation()
+          ;
+          
     }
 }

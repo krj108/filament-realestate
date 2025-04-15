@@ -54,10 +54,10 @@ class ArticleResource extends Resource
                                     $title = $get('title');
 
                                     if (!empty($title)) {
-                                        // توليد الـ slug بناءً على العنوان
+                                
                                         $slug = \Str::slug($title);
 
-                                        // التحقق من وجود slug مشابه في قاعدة البيانات
+                                  
                                         $originalSlug = $slug;
                                         $counter = 1;
                                         while (Article::where('slug', $slug)->exists()) {
@@ -65,7 +65,7 @@ class ArticleResource extends Resource
                                             $counter++;
                                         }
 
-                                        // تعيين قيمة الـ slug
+                                   
                                         $set('slug', $slug);
                                     } else {
                                         Filament::notify('warning', 'Please enter a title before generating a slug.');

@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-use Filament\Models\Contracts\HasAvatar;
+use Spatie\Permission\Traits\HasRoles;;
 use Illuminate\Support\Facades\Storage;
-class User extends Authenticatable implements HasAvatar
+class User extends Authenticatable 
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -47,9 +46,5 @@ class User extends Authenticatable implements HasAvatar
         'custom_fields' => 'array',
     ];
 
-    public function getFilamentAvatarUrl(): ?string
-    {
-        $avatarColumn = config('filament-edit-profile.avatar_column', 'avatar_url');
-        return $this->$avatarColumn ? Storage::url("$this->$avatarColumn") : null;
-    }
+ 
 }
