@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use App\Models\User;
+use App\Models\Governorate;
+use App\Models\City;
 use Filament\Tables;
 use App\Models\Property;
 use Filament\Forms\Form;
@@ -60,9 +62,25 @@ class PropertyResource extends Resource
                             ->rtl()
                             ->columnSpan('full')
                             ->required(),
+
+
                             Forms\Components\TextInput::make('location') 
                             ->label('Location')
                             ->required(),
+
+                                                // اختيار المحافظة
+                    Forms\Components\Select::make('governorate_id')
+                    ->label('Governorate')
+                    ->options(Governorate::all()->pluck('name', 'id'))
+                    ->reactive() // مهم لجلب المدن عند التغيير
+                    ->required()
+                    ->afterStateUpdated(fn (callable $set) => $set('city_id', null)),
+
+                // اختيار المدينة بناءً على المحافظة المختارة
+                Forms\Components\Select::make('city_id')
+                    ->label('City')
+                    ->options(fn (callable $get) => City::where('governorate_id', $get('governorate_id'))->pluck('name', 'id'))
+                    ->required(),
                     ])
                     ->columnSpan('full'),
 
@@ -163,7 +181,7 @@ class PropertyResource extends Resource
                     ->label('Property Name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user.name') // ✅ إظهار اسم المستخدم
+                Tables\Columns\TextColumn::make('user.name') 
                 ->label('Posted By')
                 ->sortable()
                 ->searchable(),
@@ -176,6 +194,14 @@ class PropertyResource extends Resource
 
                 Tables\Columns\TextColumn::make('price')
                     ->label('Price')
+                    ->sortable(),
+
+                    Tables\Columns\TextColumn::make('governorate.name')
+                    ->label('Governorate')
+                    ->sortable(),
+
+                    Tables\Columns\TextColumn::make('city.name')
+                    ->label('City')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')

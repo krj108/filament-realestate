@@ -11,7 +11,7 @@ class Property extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'price', 'content', 'featured_image', 'image_gallery',
+        'name', 'slug', 'price', 'content', 'featured_image', 'image_gallery', 'governorate_id', 'city_id',
         'location', 'type', 'bedrooms', 'area', 'bathrooms', 'status',
         'meta_title', 'meta_description', 'meta_keywords', 'user_id'
     ];
@@ -38,6 +38,16 @@ class Property extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function governorate()
+    {
+        return $this->belongsTo(Governorate::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     
