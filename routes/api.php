@@ -36,6 +36,8 @@ Route::get('/faqs/{id}', [FAQController::class, 'show']);
 
 Route::get('/properties', [PropertyController::class, 'index']);
 Route::get('/properties/{slug}', [PropertyController::class, 'show']);
+Route::get('/properties/governorate/{governorateId}', [PropertyController::class, 'byGovernorate']);
+Route::get('/properties/city/{cityId}', [PropertyController::class, 'byCity']);
 
 Route::get('/pages', [PageController::class, 'index']);
 Route::get('/pages/{slug}', [PageController::class, 'show']);
